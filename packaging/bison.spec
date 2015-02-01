@@ -50,7 +50,7 @@ simple programs to supply minimal support for the generated parsers.
 
 %build
 %configure --disable-nls
-make
+make %{?_smp_mflags}
 
 %install
 %makeinstall
@@ -59,6 +59,7 @@ make
 rm -f %{buildroot}/%{_bindir}/yacc
 rm -f %{buildroot}/%{_mandir}/man1/yacc*
 rm -rf %{buildroot}/%{_infodir}
+
 
 # The distribution contains also source files.  These are used by m4
 # when the target parser file is generated.
