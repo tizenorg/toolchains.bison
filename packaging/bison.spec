@@ -6,7 +6,6 @@ Summary:        A GNU general-purpose parser generator
 Url:            http://www.gnu.org/software/bison/
 Group:          Development/Tools
 Source:         ftp://ftp.gnu.org/pub/gnu/bison/bison-%{version}.tar.bz2
-Source1001: packaging/bison.manifest 
 BuildRequires:  m4 >= 1.4
 Requires:       m4 >= 1.4
 
@@ -50,9 +49,8 @@ simple programs to supply minimal support for the generated parsers.
 %setup -q
 
 %build
-cp %{SOURCE1001} .
 %configure --disable-nls
-make
+make %{?_smp_mflags}
 
 %install
 %makeinstall
@@ -66,7 +64,6 @@ rm -rf %{buildroot}/%{_infodir}
 # The distribution contains also source files.  These are used by m4
 # when the target parser file is generated.
 %files
-%manifest bison.manifest
 %defattr(-,root,root,-)
 %doc AUTHORS NEWS README THANKS TODO
 %{_mandir}/*/bison*
@@ -75,6 +72,5 @@ rm -rf %{buildroot}/%{_infodir}
 %{_datadir}/aclocal/bison*.m4
 
 %files devel
-%manifest bison.manifest
 %defattr(-,root,root)
 %{_libdir}/liby.a
